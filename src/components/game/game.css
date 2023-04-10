@@ -1,84 +1,163 @@
 .mouth {
-    width: 200px;
-    height: 100px;
-    border-radius: 100px;
-    border: 10px solid red;
-    background-color: black;
+  width: 200px;
+  height: 100px;
+  border-radius: 100px;
+  border: 10px solid red;
+  background-color: black;
 }
 
 .mouth-bottom {
-    width: 200px; 
-    height: 50px;
-    border: 10px solid red;
-    background-color: none;
-    border-radius: 0 0 100px 100px;
-    border-top: none;
+  width: 200px;
+  height: 50px;
+  border: 10px solid red;
+  background-color: none;
+  border-radius: 0 0 100px 100px;
+  border-top: none;
 }
 
 .teeth {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 23px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.tooth {
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 0 0 5px 5px;
+}
+
+.tongue {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 40px;
+  border-radius: 50% 50% 0 0;
+  background-color: pink;
+  animation: tongueStretch 1s ease-in-out infinite;
+}
+
+.tongue::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 30px;
+  background-color: darkred;
+  animation: tongueLineStretch 1s ease-in-out infinite;
+}
+
+.eye-left {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 50%;
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 23px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    top: -60px;
+    left: 50px;
+    transform: scaleY(1);
+    transform-origin: center center;
+    transform-box: fill-box;
+    animation: eyeBlink 4s linear infinite;
   }
   
-  .tooth {
-    width: 20px;
-    height: 20px;
-    border: 2px solid white;
-    background-color: white;
-    border-radius: 0 0 5px 5px;
-  }
-
-  .tongue {
+  .pupil {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 40px;
-    border-radius: 50% 50% 0 0;
-    background-color: pink;
-    animation: tongueStretch 1s ease-in-out infinite;
+    top: 5px;
+    left: 5px;
+    border: 5px solid lightskyblue;
+    overflow: hidden;
+    animation : eyeRoll 2s ease-in-out infinite;
   }
-
-  .tongue::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1px;
+  
+  .eye-right {
+    width: 30px;
     height: 30px;
-    background-color: darkred;
-    animation: tongueLineStretch 1s ease-in-out infinite;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 50%;
+    position: absolute;
+    top: -60px;
+    right: 50px;
+    transform: scaleY(1);
+    transform-origin: center center;
+    transform-box: fill-box;
+    animation: eyeBlink 4s linear infinite;
+  }
+  
+  @keyframes eyeRoll {
+      0% {
+          left: 0;
+      }
+      50% {
+          left: 10px;
+      }
+      100% {
+          left: 0;
+      }
+  }
+  
+  @keyframes eyeBlink {
+      0% { transform: scaleY(1); }
+      5% { transform: scaleY(1); }
+      10% { transform: scaleY(1); }
+        15% { transform: scaleY(1); }
+      20% { transform: scaleY(1); }
+        25% { transform: scaleY(1); }
+      30% { transform: scaleY(1); }
+        35% { transform: scaleY(1); }
+      40% { transform: scaleY(1); }
+        45% { transform: scaleY(1); }
+      50% { transform: scaleY(1); }
+        55% { transform: scaleY(1); }
+      60% { transform: scaleY(0); }
+        65% { transform: scaleY(1); }
+      70% { transform: scaleY(1); }
+        75% { transform: scaleY(1); }
+      80% { transform: scaleY(1); }
+        85% { transform: scaleY(1); }
+      90% { transform: scaleY(1); }
+        95% { transform: scaleY(1); }
+      100% { transform: scaleY(1); }
   }
 
-    @keyframes tongueStretch {
-        0% {
-        height: 40px;
-        }
-        50% {
-        height: 60px;
-        }
-        100% {
-        height: 40px;
-        }
-    }
+@keyframes tongueStretch {
+  0% {
+    height: 40px;
+  }
+  50% {
+    height: 60px;
+  }
+  100% {
+    height: 40px;
+  }
+}
 
-    @keyframes tongueLineStretch {
-        0% {
-        height: 25px;
-        }
-        50% {
-        height: 45px;
-        }
-        100% {
-        height: 25px;
-        }
-    }
+@keyframes tongueLineStretch {
+  0% {
+    height: 25px;
+  }
+  50% {
+    height: 45px;
+  }
+  100% {
+    height: 25px;
+  }
+}

@@ -25,6 +25,7 @@ export default function Game() {
         height: "99%",
       }}
     >
+
       <div
         className="mouth"
         style={{
@@ -35,6 +36,15 @@ export default function Game() {
           margin: 0,
         }}
       >
+
+        <div className="eye-left">
+            <div className="pupil" />
+        </div>
+
+        <div className="eye-right">
+            <div className="pupil" />
+        </div>
+
         <div className="teeth">
             <div className="tooth" />
             <div className="tooth" />
