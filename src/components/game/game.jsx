@@ -3,20 +3,62 @@ import "./game.css";
 
 export default function Game() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [fontSize, setFontSize] = useState(16);
 
-  const handleMouseMove = (e) => {
-    setPosition({ x: e.clientX, y: e.clientY });
+  const handleMove = (e) => {
+    if (e.type === "touchmove") {
+      const touch = e.touches[0]; // Get the first touch
+      setPosition({ x: touch.clientX, y: touch.clientY });
+    } else {
+      setPosition({ x: e.clientX, y: e.clientY });
+    }
   };
 
-  // Determine the max values for the left and bottom properties
-  const maxLeft = window.innerWidth - 220; // 100 is the width of the red square
+  const handleScreenResize = () => {
 
-  // Limit the left and bottom values to prevent the red square from moving past the edges of the window
-  const left = Math.min(Math.max(position.x - 110, 0), maxLeft);
+    let fontSize = 16;
+  
+    if (window.innerWidth < 400) {
+        fontSize = 8;
+      } else if (window.innerWidth < 576) {
+        fontSize = 10;
+      } else if (window.innerWidth < 768) {
+        fontSize = 12;
+      } else if (window.innerWidth < 992) {
+        fontSize = 14;
+      } else if (window.innerWidth < 1200) {
+        fontSize = 16;
+      } else {
+        fontSize = 16;
+      }
+  
+    setFontSize(fontSize);
+  };
+
+    useEffect(() => {
+        handleScreenResize();
+        window.addEventListener("touchmove", handleScreenResize);
+        window.addEventListener("mousemove", handleScreenResize);
+        window.addEventListener("resize", handleScreenResize);
+        return () => {
+            window.removeEventListener("resize", handleScreenResize);
+            window.removeEventListener("mousemove", handleScreenResize);
+            window.removeEventListener("touchmove", handleScreenResize);
+        };
+    }, [ fontSize ]);
+
+    const calculatePosition = () => {
+        const maxLeft = (window.innerWidth / fontSize - 13.75); /* convert to rem units */
+        const left = Math.min(Math.max(position.x / fontSize - 6.875, 0), maxLeft);
+        return { left, maxLeft };
+    };
+      
+      const { left, maxLeft } = calculatePosition();
 
   return (
     <div
-      onMouseMove={handleMouseMove}
+      onTouchMove={handleMove}
+      onMouseMove={handleMove}
       style={{
         position: "absolute",
         left: 0,
@@ -30,8 +72,7 @@ export default function Game() {
         className="mouth"
         style={{
           position: "absolute",
-          left: left,
-          right: "100vw" - left,
+          left: `${left}rem`,
           bottom: "5rem",
           margin: 0,
         }}
@@ -56,7 +97,7 @@ export default function Game() {
         className="mouth-bottom"
         style={{
           position: "absolute",
-          left: left,
+          left: `${left}rem`,
           bottom: "5rem",
         }}
       >
