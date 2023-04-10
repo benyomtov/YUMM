@@ -1,17 +1,53 @@
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+    html {
+      font-size: 16px;
+    }
+
+}
+
+@media (max-width: 992px) {
+    html {
+      font-size: 14px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    html {
+      font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+      font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+      font-size: 8px;
+    }
+}
+
 .mouth {
-  width: 200px;
-  height: 100px;
-  border-radius: 100px;
-  border: 10px solid red;
+  width: 12.5rem;
+  height: 6.25rem;
+  border-radius: 6.25rem;
+  border: .625rem solid red;
   background-color: black;
 }
 
 .mouth-bottom {
-  width: 200px;
-  height: 50px;
-  border: 10px solid red;
+  width: 12.5rem;
+  height: 3.125rem;
+  border: .625rem solid red;
   background-color: none;
-  border-radius: 0 0 100px 100px;
+  border-radius: 0 0 6.25rem 6.25rem;
   border-top: none;
 }
 
@@ -20,19 +56,19 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 23px;
+  width: 7.5rem;
+  height: 1.438rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
 .tooth {
-  width: 20px;
-  height: 20px;
-  border: 2px solid white;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: .125rem solid white;
   background-color: white;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 .313rem .313rem;
 }
 
 .tongue {
@@ -40,8 +76,8 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 40px;
+  width: 3.75rem;
+  height: 2.5rem;
   border-radius: 50% 50% 0 0;
   background-color: pink;
   animation: tongueStretch 1s ease-in-out infinite;
@@ -53,21 +89,21 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1px;
-  height: 30px;
+  width: .063rem;
+  height: 1.875rem;
   background-color: darkred;
   animation: tongueLineStretch 1s ease-in-out infinite;
 }
 
 .eye-left {
-    width: 30px;
-    height: 30px;
+    width: 1.875rem;
+    height: 1.875rem;
     background-color: white;
-    border: 3px solid black;
+    border: .188rem solid black;
     border-radius: 50%;
     position: absolute;
-    top: -60px;
-    left: 50px;
+    top: -3.75rem;
+    left: 3.125rem;
     transform: scaleY(1);
     transform-origin: center center;
     transform-box: fill-box;
@@ -75,27 +111,27 @@
   }
   
   .pupil {
-    width: 10px;
-    height: 10px;
+    width: .625rem;
+    height: .625rem;
     background-color: black;
     border-radius: 50%;
     position: absolute;
-    top: 5px;
-    left: 5px;
-    border: 5px solid lightskyblue;
+    top: .313rem;
+    left: .313rem;
+    border: .313rem solid lightskyblue;
     overflow: hidden;
     animation : eyeRoll 2s ease-in-out infinite;
   }
   
   .eye-right {
-    width: 30px;
-    height: 30px;
+    width: 1.875rem;
+    height: 1.875rem;
     background-color: white;
-    border: 3px solid black;
+    border: .188rem solid black;
     border-radius: 50%;
     position: absolute;
-    top: -60px;
-    right: 50px;
+    top: -3.75rem;
+    right: 3.125rem;
     transform: scaleY(1);
     transform-origin: center center;
     transform-box: fill-box;
@@ -107,7 +143,7 @@
           left: 0;
       }
       50% {
-          left: 10px;
+          left: .625rem;
       }
       100% {
           left: 0;
@@ -140,24 +176,24 @@
 
 @keyframes tongueStretch {
   0% {
-    height: 40px;
+    height: 2.5rem;
   }
   50% {
-    height: 60px;
+    height: 3.75rem;
   }
   100% {
-    height: 40px;
+    height: 2.5rem;
   }
 }
 
 @keyframes tongueLineStretch {
   0% {
-    height: 25px;
+    height: 1.563rem;
   }
   50% {
-    height: 45px;
+    height: 2.813rem;
   }
   100% {
-    height: 25px;
+    height: 1.563rem;
   }
 }
