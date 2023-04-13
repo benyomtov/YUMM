@@ -9,6 +9,7 @@ export default function Game() {
   const [fontSize, setFontSize] = useState(16);
 
   const handleMove = (e) => {
+    e.preventDefault(); // Prevent scrolling when touching the screen
     if (e.type === "touchmove") {
       const touch = e.touches[0]; // Get the first touch
       setPosition({ x: touch.clientX, y: touch.clientY });
@@ -16,6 +17,24 @@ export default function Game() {
       setPosition({ x: e.clientX, y: e.clientY });
     }
   };
+
+
+
+  useEffect(() => {
+
+    const scrollDiv = document.getElementById("scrollDiv");
+
+    if (scrollDiv) {
+      scrollDiv.addEventListener("touchmove", handleMove);
+      scrollDiv.addEventListener("mousemove", handleMove);
+    }
+    return () => {
+      if (scrollDiv) {
+        scrollDiv.removeEventListener("touchmove", handleMove);
+        scrollDiv.removeEventListener("mousemove", handleMove);
+      }
+    };
+  }, []);
 
   const handleScreenResize = () => {
 
@@ -40,13 +59,9 @@ export default function Game() {
 
     useEffect(() => {
         handleScreenResize();
-        window.addEventListener("touchmove", handleScreenResize);
-        window.addEventListener("mousemove", handleScreenResize);
         window.addEventListener("resize", handleScreenResize);
         return () => {
             window.removeEventListener("resize", handleScreenResize);
-            window.removeEventListener("mousemove", handleScreenResize);
-            window.removeEventListener("touchmove", handleScreenResize);
         };
     }, [ fontSize ]);
 
@@ -60,7 +75,11 @@ export default function Game() {
 
   return (
     <div
-      onTouchMove={handleMove}
+        id="scrollDiv"
+    //   onTouchMove={ (e) => {
+    //     e.preventDefault(); // Prevent scrolling when touching the screen
+    //     handleMove(e);
+    //   }}
       onMouseMove={handleMove}
       style={{
         position: "absolute",
