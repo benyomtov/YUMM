@@ -18,10 +18,7 @@ export default function Game() {
     }
   };
 
-
-
   useEffect(() => {
-
     const scrollDiv = document.getElementById("scrollDiv");
 
     if (scrollDiv) {
@@ -37,49 +34,79 @@ export default function Game() {
   }, []);
 
   const handleScreenResize = () => {
-
     let fontSize = 16;
-  
+
     if (window.innerWidth < 400) {
-        fontSize = 8;
-      } else if (window.innerWidth < 576) {
-        fontSize = 10;
-      } else if (window.innerWidth < 768) {
-        fontSize = 12;
-      } else if (window.innerWidth < 992) {
-        fontSize = 14;
-      } else if (window.innerWidth < 1200) {
-        fontSize = 16;
-      } else {
-        fontSize = 16;
-      }
-  
+      fontSize = 8;
+    } else if (window.innerWidth < 576) {
+      fontSize = 10;
+    } else if (window.innerWidth < 768) {
+      fontSize = 12;
+    } else if (window.innerWidth < 992) {
+      fontSize = 14;
+    } else if (window.innerWidth < 1200) {
+      fontSize = 16;
+    } else {
+      fontSize = 16;
+    }
+
     setFontSize(fontSize);
   };
 
-    useEffect(() => {
-        handleScreenResize();
-        window.addEventListener("resize", handleScreenResize);
-        return () => {
-            window.removeEventListener("resize", handleScreenResize);
-        };
-    }, [ fontSize ]);
-
-    const calculatePosition = () => {
-        const maxLeft = (window.innerWidth / fontSize - 13.75); /* convert to rem units */
-        const left = Math.min(Math.max(position.x / fontSize - 6.875, 0), maxLeft);
-        return { left, maxLeft };
+  useEffect(() => {
+    handleScreenResize();
+    window.addEventListener("resize", handleScreenResize);
+    return () => {
+      window.removeEventListener("resize", handleScreenResize);
     };
-      
-      const { left, maxLeft } = calculatePosition();
+  }, [fontSize]);
+
+  const calculatePosition = () => {
+    const maxLeft =
+      window.innerWidth / fontSize - 13.75; /* convert to rem units */
+    const left = Math.min(Math.max(position.x / fontSize - 6.875, 0), maxLeft);
+    return { left, maxLeft };
+  };
+
+  const { left, maxLeft } = calculatePosition();
+
+  const fruitNames = ["Apple", "Orange", "Pear"];
+
+  const fruitComponents = {
+    Apple: { component: <Apple />, xPos: 0 },
+    Orange: { component: <Orange />, xPos: 0 },
+    Pear: { component: <Pear />, xPos: 0 },
+    };
+
+  const [fruits, setFruits] = useState([]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const newFruitName = fruitNames[Math.floor(Math.random() * fruitNames.length)];
+            const maxXPos = window.innerWidth - 200;
+            const newFruit = {
+                component: fruitComponents[newFruitName].component,
+                xPos: Math.floor(Math.random() * maxXPos) + 50,
+            };
+            
+            setFruits([...fruits, newFruit]);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [fruits]);
+
+
+  const styles = {
+    fruitPosition: {
+        position: "absolute",
+        top: "0px",
+    }
+    };
+
 
   return (
     <div
-        id="scrollDiv"
-    //   onTouchMove={ (e) => {
-    //     e.preventDefault(); // Prevent scrolling when touching the screen
-    //     handleMove(e);
-    //   }}
+      id="scrollDiv"
       onMouseMove={handleMove}
       style={{
         position: "absolute",
@@ -90,9 +117,12 @@ export default function Game() {
       }}
     >
 
-      <Apple />
-      <Orange />
-      <Pear />
+        {fruits.map((fruit, index) => (
+            <div key={index} style={{ ...styles.fruitPosition, left: fruit.xPos}}>
+                {fruit.component}
+            </div>
+        ))}
+
 
       <div
         className="mouth"
@@ -103,20 +133,18 @@ export default function Game() {
           margin: 0,
         }}
       >
-
         <div className="eye-left">
-            <div className="pupil" />
+          <div className="pupil" />
         </div>
 
         <div className="eye-right">
-            <div className="pupil" />
+          <div className="pupil" />
         </div>
 
         <div className="teeth">
-            <div className="tooth" />
-            <div className="tooth" />
-        </div>   
-
+          <div className="tooth" />
+          <div className="tooth" />
+        </div>
       </div>
 
       <div
@@ -128,7 +156,7 @@ export default function Game() {
         }}
       >
         <div className="tongue" />
-        </div>
+      </div>
     </div>
   );
 }
