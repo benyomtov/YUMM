@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./game.css";
-import Apple from "../fruits/apple/apple";
-import Orange from "../fruits/orange/orange";
-import Pear from "../fruits/pear/pear";
+import FruitGen from "../fruits/fruitGen/fruitGen";
 
 export default function Game() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -70,40 +68,6 @@ export default function Game() {
 
   const { left, maxLeft } = calculatePosition();
 
-  const fruitNames = ["Apple", "Orange", "Pear"];
-
-  const fruitComponents = {
-    Apple: { component: <Apple />, xPos: 0 },
-    Orange: { component: <Orange />, xPos: 0 },
-    Pear: { component: <Pear />, xPos: 0 },
-    };
-
-  const [fruits, setFruits] = useState([]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const newFruitName = fruitNames[Math.floor(Math.random() * fruitNames.length)];
-            const maxXPos = window.innerWidth - 200;
-            const newFruit = {
-                component: fruitComponents[newFruitName].component,
-                xPos: Math.floor(Math.random() * maxXPos) + 50,
-            };
-            
-            setFruits([...fruits, newFruit]);
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [fruits]);
-
-
-  const styles = {
-    fruitPosition: {
-        position: "absolute",
-        top: "0px",
-    }
-    };
-
-
   return (
     <div
       id="scrollDiv"
@@ -117,11 +81,7 @@ export default function Game() {
       }}
     >
 
-        {fruits.map((fruit, index) => (
-            <div key={index} style={{ ...styles.fruitPosition, left: fruit.xPos}}>
-                {fruit.component}
-            </div>
-        ))}
+      <FruitGen />
 
 
       <div
