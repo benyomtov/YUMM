@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./game.css";
+import Apple from "../fruits/apple/apple";
+import Orange from "../fruits/orange/orange";
+import Pear from "../fruits/pear/pear";
 
 export default function Game() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -67,6 +70,10 @@ export default function Game() {
         height: "99%",
       }}
     >
+
+      <Apple />
+      <Orange />
+      <Pear />
 
       <div
         className="mouth"
